@@ -1,0 +1,36 @@
+import json
+import urllib
+import webbrowser
+
+def get_fql_json(query, access_token):
+  params = urllib.urlencode({'q':query, 'access_token':access_token});
+  url = "https://graph.facebook.com/fql?"+params;
+  print 'Querying: ' + url
+  data = urllib.urlopen(url).read();
+  rjson = json.loads(data);
+  return rjson;
+
+def get_name_from_id(uid, token):
+  query = "SELECT name FROM user WHERE uid="+str(uid);
+  name_json = get_fql_json(query, token);
+  name = name_json['data'];
+  for n in name:
+    return n['name'];
+
+def get_detail_from_id(detail, uid, token):
+  query = "SELECT" + detail + "FROM user WHERE uid="+str(uid);
+  detail_json = get_fql_json(query, token);
+  detail = detail_json['data'];
+  for d in detail:
+    return d[detail];
+
+def get_token():
+  f = open("token.txt", "r");
+  token = "";
+  for line in f:
+    token = line.strip();
+    break;
+  return token;
+
+def open_browser(id):
+  webbrowser.open_browser('http://facebook.com/' + id);
