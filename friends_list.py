@@ -1,3 +1,5 @@
+#Writes all your friends names and ids to a file named friends_ids.txt
+
 import urllib
 import facebook
 import access_token

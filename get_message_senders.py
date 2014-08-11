@@ -1,3 +1,5 @@
+# Writes the ids and names of those people who have sent you a message
+
 import message_senders;
 import sys;
 

@@ -1,3 +1,5 @@
+#Contains helper functions for querying used by other programs
+
 import json
 import urllib
 import webbrowser

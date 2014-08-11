@@ -1,3 +1,5 @@
+#Contains functions used by get_message_senders.py"
+
 import urllib
 import json
 import sys;
