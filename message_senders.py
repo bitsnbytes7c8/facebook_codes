@@ -5,15 +5,17 @@ import json
 import sys;
 import helper
 
-def get_fifty(start, end):
-  token = helper.get_token();
+token_filename = "token.txt"
+
+def get_fifty(start, end, token):
   query= "SELECT thread_id,updated_time FROM thread WHERE viewer_id=me() AND folder_id=0 LIMIT " + str(start) + "," + str(end);
   
   mesg_ids = helper.get_fql_json(query, token);
   sender_names = {};
-  if len(mesg_ids['data']) == 0:
-    return None;
+  
   try:
+    if len(mesg_ids['data']) == 0:
+      return None;
     for id in mesg_ids['data']:
       thread_id = id['thread_id'];
       time = id['updated_time'];
@@ -30,6 +32,8 @@ def get_fifty(start, end):
       except KeyError:
         print sent_id['error']['message'];
         return None
+      except:
+        return None
 
   except TypeError as e:
     print e;
@@ -37,6 +41,7 @@ def get_fifty(start, end):
   except KeyError as e:
     print mesg_ids['error']['message'];
     return None;
+  except:
+    return None;
   return sender_names;
 
-get_fifty(1,50);

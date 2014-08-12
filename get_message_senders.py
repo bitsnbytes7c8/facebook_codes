@@ -4,14 +4,16 @@ import message_senders;
 import sys;
 
 senders = {};
-def get_senders(filename):
+filename = "message_senders.txt";
+
+def get_senders(token):
   f = open(filename, "w");
   i=1;
   flag = 0;
   while(flag == 0):
     print "Querying for " + str(i) + " " + str(i+49);
     try:
-      senders_dict = message_senders.get_fifty(i, i+49);
+      senders_dict = message_senders.get_fifty(i, i+49, token);
       i += 50;
       print "Received dictionary.\nProcessing....";
       if senders_dict is None:
@@ -37,4 +39,3 @@ def get_senders(filename):
       print e;
   return;
 
-get_senders("message_senders.txt");

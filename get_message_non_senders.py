@@ -36,4 +36,3 @@ def open_non_senders():
     else:
       continue;
 
-open_non_senders();
