@@ -21,9 +21,17 @@ def get_non_senders():
   for line in f:
     id1 = (line.split())[0];
     senders.append(id1);
+  senders_dict = {};
+  for sender in senders:
+    if sender not in senders_dict.keys():
+      senders_dict[sender] = 1;
+  print len(senders_dict.keys());
+  print len(senders);
+  print "Got " + str(len(friends)-len(senders)) + " friends who never sent you any messages."
   for id in friends:
     if id not in senders:
       non_senders.append(id);
+  print len(non_senders);
   return non_senders;
 
 def open_non_senders():

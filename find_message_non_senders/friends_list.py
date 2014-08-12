@@ -1,16 +1,21 @@
 #Writes all your friends names and ids to a file named friends_ids.txt
 
 import urllib
-import facebook
-import access_token
+import helper
+#import facebook
+#import access_token
 
 def get_friends_list(token):
-  graph = facebook.GraphAPI(token);
-  profile = graph.get_object("me");
-  friends = graph.get_connections("me", "friends")
-  friends_list = [friend['id'] for friend in friends['data']]
-  friends_name = [friend['name'] for friend in friends['data']]
-
+  query = "SELECT uid,name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1=me() )";
+  friends_json = helper.get_fql_json(query, token);
+  print "Retrieved " + str(len(friends_json['data'])) + "friends";
+  friends_list = []
+  friends_name = [];
+  i = 0;
+  for person in friends_json["data"]:
+    friends_list.append(person['uid']);
+    friends_name.append(person['name']);
   f = open("friends_ids.txt", "w");
   for id,name in zip(friends_list, friends_name): 
     f.write((str(id) + " " + name+ "\n").encode('utf-8'));
+

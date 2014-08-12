@@ -3,7 +3,7 @@
 import message_senders;
 import sys;
 
-senders = {};
+senders = set();
 filename = "message_senders.txt";
 
 def get_senders(token):
@@ -20,19 +20,20 @@ def get_senders(token):
         print "Dictionary returned is None";
         flag = 1;
         break;
-      for key in senders_dict.keys():
-        if key not in senders.keys():
-          senders[key] = senders_dict[key];
+      for key in senders_dict:
+        if key not in senders:
+          senders.add(key);
       print "Finished processing dictionary";
     except TypeError as e:
       print "Failed to process for " + str(i) + " " + str(i+49);
       print e;
       i+=50;
       continue;
+  print "Retrieved " + str(len(senders)) + " who sent you messages";
   print 'Writing to file.....';
-  for key in senders.keys():
+  for key in senders:
     try:
-      f.write((str(senders[key]) + "\t" + str(key) + "\n").encode('utf-8'));
+      f.write((str(key) + "\n").encode('utf-8'));
     except(TypeError):
       sys.stderr.write("User not found - probably a group mesg\n");
     except Exception as e:
