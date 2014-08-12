@@ -26,13 +26,5 @@ def get_detail_from_id(detail, uid, token):
   for d in detail:
     return d[detail];
 
-def get_token():
-  f = open("token.txt", "r");
-  token = "";
-  for line in f:
-    token = line.strip();
-    break;
-  return token;
-
 def open_browser(id):
-  webbrowser.open_browser('http://facebook.com/' + id);
+  webbrowser.open('http://facebook.com/' + id);
