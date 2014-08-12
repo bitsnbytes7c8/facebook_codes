@@ -4,11 +4,14 @@ import helper
 
 friends_names = {};
 
+friends_ids = "friends_ids.txt"
+message_senders = "message_senders.txt"
+
 def get_non_senders():
   non_senders = [];
   friends = [];
   senders = [];
-  f = open("friends_ids.txt", "r");
+  f = open(friends_ids, "r");
   for line in f:
     nameid = line.split();
     id1 = nameid[0];
@@ -17,7 +20,7 @@ def get_non_senders():
       friends_names[id1] = friends_names[id1] + " " + nameid[2];
     friends.append(id1);
   f.close();
-  f = open("message_senders.txt", "r");
+  f = open(message_senders, "r");
   for line in f:
     id1 = (line.split())[0];
     senders.append(id1);
